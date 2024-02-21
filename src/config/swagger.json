@@ -1,0 +1,741 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1/",
+      "description": "Local development server"
+    },
+    {
+      "url": "https://api.example.com/api/v1/",
+      "description": "Production server"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/vehicles": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "List all Vehicles",
+        "responses": {
+          "200": {
+            "description": "Vehicles details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "integer"
+                      },
+                      "model": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "_id": 1,
+                        "type": "car",
+                        "model": "BMW",
+                        "status": "1",
+                        "createdAt": "2019-01-01T00:00:00.000Z",
+                        "updatedAt": "2019-01-01T00:00:00.000Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No vehicles found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/registser": {
+      "post": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Add a vehicles",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "model": "M3",
+                "type": "T3",
+                "status": "2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Vehicles details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "integer"
+                      },
+                      "model": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "_id": 1,
+                      "type": "car",
+                      "model": "BMW",
+                      "status": "available",
+                      "createdAt": "2019-01-01T00:00:00.000Z",
+                      "updatedAt": "2019-01-01T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/logs": {
+      "get": {
+        "tags": [
+          "Logging"
+        ],
+        "summary": "Get vehicles Log details",
+        "responses": {
+          "200": {
+            "description": "Vehicles log details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "integer"
+                      },
+                      "vehicleId": {
+                        "type": "string"
+                      },
+                      "fuelLevel": {
+                        "type": "number"
+                      },
+                      "speed": {
+                        "type": "number"
+                      },
+                      "location": {
+                        "type": "object",
+                        "properties": {
+                          "coordinates": {
+                            "type": "array"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "location": {
+                          "type": "Point",
+                          "coordinates": [
+                            34.052235,
+                            18.243683
+                          ]
+                        },
+                        "_id": "65cf57c9ab4c26534db53c22",
+                        "vehicleId": "1",
+                        "fuelLevel": 80,
+                        "speed": 60,
+                        "createdAt": "2024-02-16T12:40:41.910Z",
+                        "updatedAt": "2024-02-16T12:40:41.910Z",
+                        "__v": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No vehicles found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/log": {
+      "post": {
+        "tags": [
+          "Logging"
+        ],
+        "summary": "Add vehicle log to the database to simulate IOT data",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "vehicleId": {
+                    "type": "string"
+                  },
+                  "fuelLevel": {
+                    "type": "number"
+                  },
+                  "speed": {
+                    "type": "number"
+                  },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "coordinates": {
+                        "type": "array"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "vehicleId": "1",
+                "speed": 80,
+                "fuelLevel": 1000,
+                "location": {
+                  "type": "Point",
+                  "coordinates": [
+                    45.052235,
+                    20.243683
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Added vehicles log details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "_id": {
+                      "type": "integer"
+                    },
+                    "vehicleId": {
+                      "type": "string"
+                    },
+                    "fuelLevel": {
+                      "type": "number"
+                    },
+                    "speed": {
+                      "type": "number"
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "coordinates": {
+                          "type": "array"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "location": {
+                    "type": "Point",
+                    "coordinates": [
+                      34.052235,
+                      18.243683
+                    ]
+                  },
+                  "_id": "65cf57c9ab4c26534db53c22",
+                  "vehicleId": "1",
+                  "fuelLevel": 80,
+                  "speed": 60,
+                  "createdAt": "2024-02-16T12:40:41.910Z",
+                  "updatedAt": "2024-02-16T12:40:41.910Z",
+                  "__v": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "500": {
+        "description": "Internal Server Error"
+      }
+    },
+    "/vehicles/maintenance/{vehicleId}": {
+      "get": {
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Get a vehicles maintenances",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "description": "ID of the vehicle",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Maintenance details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "vehicleId": {
+                        "type": "string"
+                      },
+                      "maintenanceType": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "cost": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "_id": "65cf69dd6ce7fce603c8bda5",
+                        "vehicleId": "65cf506dc576f75d6b447afa",
+                        "maintenanceType": "Tire Rotation",
+                        "description": "Rotated tires and checked tire pressure.",
+                        "cost": 100,
+                        "date": "2024-01-10T00:00:00.000Z",
+                        "__v": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No maintenance found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/maintenance": {
+      "get": {
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "List all Vehicles maintenances",
+        "responses": {
+          "200": {
+            "description": "Maintenance details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "vehicleId": {
+                        "type": "string"
+                      },
+                      "maintenanceType": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "cost": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "_id": "65cf69dd6ce7fce603c8bda5",
+                        "vehicleId": "65cf506dc576f75d6b447afa",
+                        "maintenanceType": "Tire Rotation",
+                        "description": "Rotated tires and checked tire pressure.",
+                        "cost": 100,
+                        "date": "2024-01-10T00:00:00.000Z",
+                        "__v": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No maintenance found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/maintenance/add": {
+      "post": {
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Add a maintainance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "vehicleId": {
+                    "type": "string"
+                  },
+                  "maintenanceType": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "cost": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "date": "2024-02-25",
+                "maintenanceType": "Brake Inspection",
+                "description": "Inspected brake pads, rotors, and brake fluid.",
+                "mileage": 4000,
+                "cost": 500.0,
+                "vehicleId": "65cf506dc576f75d6b447afa"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Maintenance added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "vehicleId": {
+                      "type": "string"
+                    },
+                    "maintenanceType": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "cost": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "_id": "65cf69dd6ce7fce603c8bda5",
+                    "vehicleId": "65cf506dc576f75d6b447afa",
+                    "maintenanceType": "Tire Rotation",
+                    "description": "Rotated tires and checked tire pressure.",
+                    "cost": 100,
+                    "date": "2024-01-10T00:00:00.000Z",
+                    "__v": 0
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/analytics/{vehicleId}": {
+      "get": {
+        "tags": [
+          "Analytics"
+        ],
+        "summary": "Get analytic details of a vehicle",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "description": "ID of the vehicle",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vehicle Analytics details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "vehicleId": {
+                        "type": "string"
+                      },
+                      "totalDistance": {
+                        "type": "string"
+                      },
+                      "totalHours": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "totalDistance": "1111.95",
+                        "totalHours": "0.61",
+                        "vehicleId": "2"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No analytics found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "/vehicles/analytics": {
+      "get": {
+        "tags": [
+          "Analytics"
+        ],
+        "summary": "Get analytic details of vehicles",
+        "responses": {
+          "200": {
+            "description": "analytic details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "vehicleId": {
+                        "type": "string"
+                      },
+                      "totalDistance": {
+                        "type": "string"
+                      },
+                      "totalHours": {
+                        "type": "string"
+                      }
+                    },
+                    "example": [
+                      {
+                        "totalDistance": "1111.95",
+                        "totalHours": "0.61",
+                        "vehicleId": "2"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No vehicles found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+    },
+    "content": {
+      "application/json": {}
+    }
+  }
+}
